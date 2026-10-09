@@ -1,0 +1,187 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Student academic profile and career acceleration settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "college": { "type": "string" },
+        "branch": { "type": "string" },
+        "currentSemester": { "type": "number" },
+        "targetRole": { "type": "string" },
+        "targetTier": { "type": "string" },
+        "leetCodeUsername": { "type": "string" },
+        "githubUsername": { "type": "string" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "name", "currentSemester", "targetRole"]
+    },
+    "RoadmapNode": {
+      "title": "RoadmapNode",
+      "description": "BTech 8-semester curriculum node with AI Gap markers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "semester": { "type": "number" },
+        "subject": { "type": "string" },
+        "category": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["NOT_STARTED", "IN_PROGRESS", "COMPLETED"] },
+        "isAiGap": { "type": "boolean" },
+        "gapPriority": { "type": "string", "enum": ["NONE", "LOW", "MEDIUM", "HIGH"] },
+        "aiGapReason": { "type": "string" },
+        "actionPlan": { "type": "string" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "semester", "title", "status", "isAiGap"]
+    },
+    "DsaProblem": {
+      "title": "DsaProblem",
+      "description": "Solved and revising DSA problems with time and space bounds",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "platform": { "type": "string" },
+        "difficulty": { "type": "string", "enum": ["EASY", "MEDIUM", "HARD"] },
+        "topic": { "type": "string" },
+        "status": { "type": "string", "enum": ["SOLVED", "REVISING", "STUCK"] },
+        "timeComplexity": { "type": "string" },
+        "spaceComplexity": { "type": "string" },
+        "notes": { "type": "string" },
+        "solvedAt": { "type": "number" }
+      },
+      "required": ["id", "title", "difficulty", "topic", "status"]
+    },
+    "InterviewSession": {
+      "title": "InterviewSession",
+      "description": "Completed technical interview with code quality and logic score metrics",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "role": { "type": "string" },
+        "topic": { "type": "string" },
+        "questionText": { "type": "string" },
+        "studentCode": { "type": "string" },
+        "feedback": { "type": "string" },
+        "codeQualityScore": { "type": "number" },
+        "logicScore": { "type": "number" },
+        "confidenceScore": { "type": "number" }
+      },
+      "required": ["id", "role", "questionText", "studentCode", "logicScore"]
+    },
+    "ResumeVersion": {
+      "title": "ResumeVersion",
+      "description": "Target company resume version with ATS scores and Google XYZ optimizations",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "targetCompany": { "type": "string" },
+        "rawContent": { "type": "string" },
+        "atsScore": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "title", "rawContent", "atsScore"]
+    },
+    "StudyTimetableSlot": {
+      "title": "StudyTimetableSlot",
+      "description": "Weekly study timetable slot with cron schedule and streaks",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "dayOfWeek": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "topic": { "type": "string" },
+        "activityType": { "type": "string", "enum": ["DSA", "CORE_CS", "PROJECT", "CONTEST", "REVISION"] },
+        "cronSchedule": { "type": "string" },
+        "streakCount": { "type": "number" },
+        "isCompletedToday": { "type": "boolean" },
+        "priority": { "type": "string", "enum": ["HIGH", "MEDIUM", "LOW"] },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "topic", "activityType", "cronSchedule", "streakCount"]
+    },
+    "CognitiveGameResult": {
+      "title": "CognitiveGameResult",
+      "description": "Big-O Agility and algorithmic cognitive speed trial result",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "gameType": { "type": "string" },
+        "snippetPrompt": { "type": "string" },
+        "targetAnswer": { "type": "string" },
+        "studentAnswer": { "type": "string" },
+        "isCorrect": { "type": "boolean" },
+        "responseTimeMs": { "type": "number" },
+        "score": { "type": "number" },
+        "playedAt": { "type": "number" }
+      },
+      "required": ["id", "gameType", "targetAnswer", "isCorrect", "score"]
+    },
+    "ChatbotMemoryItem": {
+      "title": "ChatbotMemoryItem",
+      "description": "Long-term mentoring interaction memory and advice record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "conversationId": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "model", "system"] },
+        "messageText": { "type": "string" },
+        "memoryKey": { "type": "string" },
+        "importanceScore": { "type": "number" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["id", "conversationId", "role", "messageText"]
+    }
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "entity": "UserProfile",
+        "description": "Student primary profile document"
+      },
+      {
+        "path": "/users/{userId}/roadmaps/{nodeId}",
+        "entity": "RoadmapNode",
+        "description": "Curriculum milestone nodes for the authenticated student"
+      },
+      {
+        "path": "/users/{userId}/dsa_problems/{problemId}",
+        "entity": "DsaProblem",
+        "description": "DSA problem tracker entries for the authenticated student"
+      },
+      {
+        "path": "/users/{userId}/interview_sessions/{sessionId}",
+        "entity": "InterviewSession",
+        "description": "Historical mock interview records for the authenticated student"
+      },
+      {
+        "path": "/users/{userId}/resume_versions/{resumeId}",
+        "entity": "ResumeVersion",
+        "description": "Resume revisions for the authenticated student"
+      },
+      {
+        "path": "/users/{userId}/study_timetable/{slotId}",
+        "entity": "StudyTimetableSlot",
+        "description": "Study timetable slots for the authenticated student"
+      },
+      {
+        "path": "/users/{userId}/cognitive_games/{gameId}",
+        "entity": "CognitiveGameResult",
+        "description": "Cognitive game attempts and scores"
+      },
+      {
+        "path": "/users/{userId}/chatbot_memory/{memoryId}",
+        "entity": "ChatbotMemoryItem",
+        "description": "Chatbot mentoring dialogue memory"
+      }
+    ]
+  }
+}

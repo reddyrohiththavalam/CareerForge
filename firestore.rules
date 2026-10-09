@@ -1,0 +1,59 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Student User Profiles
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // Student Roadmaps subcollection
+      match /roadmaps/{nodeId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Student DSA Tracker subcollection
+      match /dsa_problems/{problemId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Student Mock Interview Sessions subcollection
+      match /interview_sessions/{sessionId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Student Resume Versions subcollection
+      match /resume_versions/{resumeId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Student Study Timetable subcollection
+      match /study_timetable/{slotId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Student Cognitive Games subcollection
+      match /cognitive_games/{gameId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // Student Chatbot Memory subcollection
+      match /chatbot_memory/{memoryId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Default deny all other paths
+    match /{document=**} {
+      allow read, write: false;
+    }
+  }
+}

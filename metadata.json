@@ -1,0 +1,6 @@
+{
+  "name": "CareerForge",
+  "description": "Career Acceleration Platform for BTech engineering students with 8-semester roadmap, AI JD gap analysis, ATS resume reviewer, mock technical interviews, and burnout panic support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
